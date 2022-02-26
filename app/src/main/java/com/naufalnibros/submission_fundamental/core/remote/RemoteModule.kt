@@ -1,7 +1,7 @@
 package com.naufalnibros.submission_fundamental.core.remote
 
 import com.naufalnibros.submission_fundamental.BuildConfig
-import com.naufalnibros.submission_fundamental.core.remote.services.GeneralServices
+import com.naufalnibros.submission_fundamental.core.remote.services.BaseServices
 import com.naufalnibros.submission_fundamental.utils.NetworkUtils
 import com.naufalnibros.submission_fundamental.utils.RxErrorHandler
 import okhttp3.Cache
@@ -20,7 +20,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 val serviceModule = module {
-    factory { get<Retrofit>().create(GeneralServices::class.java) }
+    factory { get<Retrofit>().create(BaseServices::class.java) }
 }
 
 val remoteModule = module {

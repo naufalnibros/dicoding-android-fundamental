@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface GeneralServices {
+interface BaseServices {
 
     @GET("{path}")
     fun getService(@Path(value = "path", encoded = true) path: String,
