@@ -124,8 +124,6 @@
         android:layout_height="@dimen/_120sdp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_launcher_background"
-        app:border_color="@android:color/white"
-        app:border_width="2dp"
         app:finalHeight="@dimen/_32sdp"
         app:finalYPosition="2dp"
         app:layout_behavior=".custom_view.AvatarImageBehavior"
