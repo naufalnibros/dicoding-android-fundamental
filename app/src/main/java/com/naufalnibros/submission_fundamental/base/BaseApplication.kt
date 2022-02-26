@@ -19,13 +19,8 @@ abstract class BaseApplication: Application() {
         lateinit var gantiDataStore: SharedPreferences
     }
 
-    private var isDebug = true
-
     override fun onCreate() {
         super.onCreate()
-
-        isDebug = (BuildConfig.DEBUG)
-
         dependenciesInjection()
         initLogging()
     }
@@ -33,7 +28,7 @@ abstract class BaseApplication: Application() {
     private fun dependenciesInjection() {
         startKoin {
 
-            androidLogger( if (isDebug) Level.DEBUG else Level.NONE )
+            androidLogger( if (BuildConfig.DEBUG) Level.DEBUG else Level.NONE )
 
             androidContext(this@BaseApplication)
 
