@@ -49,6 +49,9 @@ dependencies {
     // viewpager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
+    // Circle Imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     //arch component
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.4.1"
