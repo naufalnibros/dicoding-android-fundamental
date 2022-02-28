@@ -50,10 +50,7 @@ val remoteModule = module {
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
 
-                Log.d(javaClass.simpleName, ":BuildConfig.TOKEN ${BuildConfig.TOKEN}")
-
-                // for auth
-                request.addHeader("Bearer", BuildConfig.TOKEN)
+                request.addHeader("Authorization", "Bearer ${BuildConfig.TOKEN}")
 
                 // for offline request that caching
                 if (NetworkUtils.hasInternet(androidContext())) {
