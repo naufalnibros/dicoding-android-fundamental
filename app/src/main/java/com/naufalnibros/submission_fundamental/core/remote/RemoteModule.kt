@@ -1,7 +1,8 @@
 package com.naufalnibros.submission_fundamental.core.remote
 
+import android.util.Log
 import com.naufalnibros.submission_fundamental.BuildConfig
-import com.naufalnibros.submission_fundamental.core.remote.services.BaseServices
+import com.naufalnibros.submission_fundamental.core.remote.services.UserServices
 import com.naufalnibros.submission_fundamental.utils.NetworkUtils
 import com.naufalnibros.submission_fundamental.utils.RxErrorHandler
 import okhttp3.Cache
@@ -20,7 +21,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 val serviceModule = module {
-    factory { get<Retrofit>().create(BaseServices::class.java) }
+    factory { get<Retrofit>().create(UserServices::class.java) }
 }
 
 val remoteModule = module {
@@ -48,6 +49,8 @@ val remoteModule = module {
             .addInterceptor(get<HttpLoggingInterceptor>())
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
+
+                Log.d(javaClass.simpleName, ":BuildConfig.TOKEN ${BuildConfig.TOKEN}")
 
                 // for auth
                 request.addHeader("Bearer", BuildConfig.TOKEN)

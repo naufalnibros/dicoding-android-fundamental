@@ -2,6 +2,7 @@ package com.naufalnibros.submission_fundamental
 
 import com.naufalnibros.submission_fundamental.base.BaseApplication
 import com.naufalnibros.submission_fundamental.core.remote.serviceModule
+import com.naufalnibros.submission_fundamental.repository.repositoryModule
 import com.naufalnibros.submission_fundamental.ui.viewModelModule
 import org.koin.core.module.Module
 
@@ -12,6 +13,7 @@ class App: BaseApplication() {
     override fun defineDependencies(): List<Module> {
         return listOf(
             serviceModule,
+            repositoryModule,
             viewModelModule
         )
     }

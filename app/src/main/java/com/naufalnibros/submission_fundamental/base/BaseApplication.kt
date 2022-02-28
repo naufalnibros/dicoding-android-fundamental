@@ -15,10 +15,6 @@ abstract class BaseApplication: Application() {
 
     abstract fun defineDependencies(): List<Module>
 
-    companion object {
-        lateinit var gantiDataStore: SharedPreferences
-    }
-
     override fun onCreate() {
         super.onCreate()
         dependenciesInjection()
@@ -28,7 +24,7 @@ abstract class BaseApplication: Application() {
     private fun dependenciesInjection() {
         startKoin {
 
-            androidLogger( if (BuildConfig.DEBUG) Level.DEBUG else Level.NONE )
+            androidLogger( if (BuildConfig.DEBUG) Level.ERROR else Level.NONE )
 
             androidContext(this@BaseApplication)
 

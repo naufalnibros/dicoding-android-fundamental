@@ -1,60 +1,77 @@
 package com.naufalnibros.submission_fundamental.ui.main.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.naufalnibros.submission_fundamental.R
+import com.naufalnibros.submission_fundamental.databinding.FragmentHomeBinding
+import com.naufalnibros.submission_fundamental.ui.main.UserAdapter
+import com.naufalnibros.submission_fundamental.utils.viewBinding
+import org.koin.android.ext.android.inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val binding by viewBinding(FragmentHomeBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val viewModel: HomeViewModel by inject()
+
+    private val adapter = UserAdapter()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.searchview.setOnQueryTextListener(onQueryTextListener)
+
+        binding.swiperefresh.setOnRefreshListener { viewModel.refresh() }
+
+        binding.recyclerview.adapter = adapter
+        binding.recyclerview.addItemDecoration(DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL))
+
+        viewModel.stateList.observe(viewLifecycleOwner, observerStateList)
+    }
+
+    private val observerStateList = Observer<HomeState> {
+        binding.swiperefresh.isRefreshing = (it == HomeState.OnLoading)
+        when (it) {
+            is HomeState.OnSuccess -> {
+                adapter.setList(it.list)
+            }
+            is HomeState.OnError -> {
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+            }
+            HomeState.OnLoading -> {}
+        }}
+
+    private val onQueryTextListener = object: SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            viewModel.search(query ?: "")
+            return false
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            viewModel.search(newText ?: "")
+            return false
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        requireActivity().menuInflater.inflate(R.menu.main_home_menu, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId) {
+//            R.id.action_darkthem -> {
+//                Toast.makeText(requireContext(), "Soon submission 3", Toast.LENGTH_LONG).show()
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
