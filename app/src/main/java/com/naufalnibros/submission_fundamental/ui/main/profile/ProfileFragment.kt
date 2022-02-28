@@ -1,8 +1,10 @@
 package com.naufalnibros.submission_fundamental.ui.main.profile
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -24,10 +26,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with (binding.toolbar) {
+        with(binding.toolbar) {
             title = user.username
             setNavigationOnClickListener {
                 findNavController().navigateUp()
+            }
+        }
+
+        with(binding.containerContent.link) {
+            text = user.htmlUrl
+            setOnClickListener {
+                CustomTabsIntent.Builder().build()
+                    .launchUrl(requireContext(), Uri.parse(user.htmlUrl))
             }
         }
 

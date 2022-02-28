@@ -5,4 +5,5 @@
     <string name="caption_no_data">Sorry, No Data :(</string>
     <string name="field_name">Nama :</string>
     <string name="field_alamat">Alamat :</string>
+    <string name="field_urlrepo">Link Profile :</string>
 </resources>
