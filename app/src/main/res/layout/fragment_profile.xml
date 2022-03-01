@@ -1,4 +1,5 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
         android:theme="@style/ThemeOverlay.AppCompat">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -17,26 +18,89 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll"
             app:toolbarId="@+id/toolbar">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/avatar"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/cardView"
+                app:layout_collapseMode="parallax"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    android:layout_gravity="center_horizontal"
+                    tools:src="@drawable/ic_dicoding"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/field_name" />
+
+                <TextView
+                    android:id="@+id/nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="Lorem Ipsum is simply" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/field_alamat" />
+
+                <TextView
+                    android:id="@+id/alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="Lorem Ipsum is simply" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/field_urlrepo" />
+
+                <TextView
+                    android:id="@+id/link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_6sdp"
+                    android:elevation="@dimen/_1sdp"
+                    android:ellipsize="end"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_medium"
+                    android:maxLines="1"
+                    android:textColor="@color/purple_500"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="italic"
+                    app:drawableEndCompat="@drawable/ic_baseline_open_in_new_24"
+                    tools:text="https://github.com/sidiqpermanahttps://github.com/sidiqpermana" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat" />
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -48,12 +112,12 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_margin="@dimen/_16sdp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
+        app:layout_anchor="@id/container_content"
+        app:layout_anchorGravity="end|bottom"
         app:srcCompat="@drawable/ic_baseline_favorite_24"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

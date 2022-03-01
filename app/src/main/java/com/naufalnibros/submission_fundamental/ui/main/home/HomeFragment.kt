@@ -1,9 +1,6 @@
 package com.naufalnibros.submission_fundamental.ui.main.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -60,18 +57,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             return false
         }
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        requireActivity().menuInflater.inflate(R.menu.main_home_menu, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId) {
-//            R.id.action_darkthem -> {
-//                Toast.makeText(requireContext(), "Soon submission 3", Toast.LENGTH_LONG).show()
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
 }

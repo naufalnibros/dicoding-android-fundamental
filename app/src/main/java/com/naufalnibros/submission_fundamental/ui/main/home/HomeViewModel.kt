@@ -6,7 +6,6 @@ import com.naufalnibros.submission_fundamental.repository.user.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import org.koin.core.component.KoinApiExtension
 import java.util.concurrent.TimeUnit
 
 /**

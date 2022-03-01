@@ -16,7 +16,7 @@ import java.net.UnknownHostException
 
 class RxErrorHandler(private val application: Application) : Consumer<Throwable> {
 
-    val errorMessageToDisplay = PublishSubject.create<String>()
+    private val errorMessageToDisplay = PublishSubject.create<String>()
 
     init {
         RxJavaPlugins.setErrorHandler(this)

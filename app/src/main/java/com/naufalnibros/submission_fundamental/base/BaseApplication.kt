@@ -1,7 +1,6 @@
 package com.naufalnibros.submission_fundamental.base
 
 import android.app.Application
-import android.content.SharedPreferences
 import com.naufalnibros.submission_fundamental.BuildConfig
 import com.naufalnibros.submission_fundamental.core.remote.errorHandleModule
 import com.naufalnibros.submission_fundamental.core.remote.remoteModule
@@ -18,7 +17,6 @@ abstract class BaseApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         dependenciesInjection()
-        initLogging()
     }
 
     private fun dependenciesInjection() {
@@ -32,17 +30,6 @@ abstract class BaseApplication: Application() {
                 mutableListOf(remoteModule, errorHandleModule)
                     .apply { addAll(defineDependencies()) }
             )
-        }
-    }
-
-    /**
-     * TODO Init logging
-     */
-    private fun initLogging() {
-        if (BuildConfig.DEBUG) {
-            // Timber.plant(get())
-        } else {
-            // Do something Init crashlytics
         }
     }
 

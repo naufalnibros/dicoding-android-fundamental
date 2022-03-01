@@ -1,9 +1,7 @@
 package com.naufalnibros.submission_fundamental.core.remote
 
-import android.util.Log
 import com.naufalnibros.submission_fundamental.BuildConfig
 import com.naufalnibros.submission_fundamental.core.remote.services.UserServices
-import com.naufalnibros.submission_fundamental.utils.NetworkUtils
 import com.naufalnibros.submission_fundamental.utils.RxErrorHandler
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -28,7 +26,7 @@ val remoteModule = module {
 
     single { File(androidContext().cacheDir, UUID.randomUUID().toString()) }
 
-    single { Cache(get(), 5 * 1024 * 1024) }
+    single { Cache(get(), (5 * 1024 * 1024)) }
 
     single {
         HttpLoggingInterceptor()
@@ -49,18 +47,7 @@ val remoteModule = module {
             .addInterceptor(get<HttpLoggingInterceptor>())
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-
                 request.addHeader("Authorization", "Bearer ${BuildConfig.TOKEN}")
-
-                // for offline request that caching
-                if (NetworkUtils.hasInternet(androidContext())) {
-                    request.addHeader("Cache-Control", "public, max-age=" + 1)
-                } else {
-                    request.addHeader(
-                        "Cache-Control",
-                        "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
-                    )
-                }
                 chain.proceed(request.build())
             }.build()
 

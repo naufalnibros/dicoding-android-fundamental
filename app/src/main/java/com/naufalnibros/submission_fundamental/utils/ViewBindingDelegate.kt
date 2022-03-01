@@ -1,8 +1,6 @@
 package com.naufalnibros.submission_fundamental.utils
 
-import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
@@ -64,10 +62,3 @@ class ViewBindingDelegate<T : ViewBinding>(
 
 fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
     ViewBindingDelegate(this, viewBindingFactory)
-
-inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
-    crossinline bindingInflater: (LayoutInflater) -> T
-) =
-    lazy(LazyThreadSafetyMode.NONE) {
-        bindingInflater.invoke(layoutInflater)
-    }
