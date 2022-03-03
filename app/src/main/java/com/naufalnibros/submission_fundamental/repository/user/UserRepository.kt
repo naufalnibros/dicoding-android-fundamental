@@ -8,10 +8,10 @@ class UserRepository(
     fun list() = service.users()
 
     /** https://api.github.com/users/naufalnibros/followers **/
-    fun followers(username: String) = service.users("$username/followers")
+    fun followers(username: String) = service.followers(username)
 
     /** https://api.github.com/users/naufalnibros/following **/
-    fun following(username: String) = service.users("$username/following")
+    fun following(username: String) = service.following(username)
 
     /** https://api.github.com/search/users?q=keyword */
     fun search(keyword: String) = service.search(keyword)

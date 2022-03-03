@@ -12,8 +12,11 @@ interface UserServices {
     @GET("users")
     fun users(): Observable<List<User>>
 
-    @GET("users/{hateoas}")
-    fun users(@Path("hateoas", encoded = true) hateoas: String): Observable<List<User>>
+    @GET("users/{username}/followers")
+    fun followers(@Path("username") hateoas: String): Observable<List<User>>
+
+    @GET("users/{username}/following")
+    fun following(@Path("username") hateoas: String): Observable<List<User>>
 
     @GET("search/users")
     fun search(@Query("q") keyword: String): Observable<UserSearchResponse>
