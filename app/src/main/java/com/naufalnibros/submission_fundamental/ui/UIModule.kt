@@ -1,5 +1,8 @@
 package com.naufalnibros.submission_fundamental.ui
 
+import com.naufalnibros.submission_fundamental.ui.main.favorite.FavoriteUseCase
+import com.naufalnibros.submission_fundamental.ui.main.favorite.FavoriteUseCaseImplement
+import com.naufalnibros.submission_fundamental.ui.main.favorite.FavoriteViewModel
 import com.naufalnibros.submission_fundamental.ui.main.home.HomeUseCase
 import com.naufalnibros.submission_fundamental.ui.main.home.HomeUseCaseImplement
 import com.naufalnibros.submission_fundamental.ui.main.home.HomeViewModel
@@ -24,4 +27,7 @@ val viewModelModule = module {
 
     single<ProfileTabUseCase> { ProfileTabUseCaseImplement(get()) }
     viewModel { ProfileTabViewModel(get()) }
+
+    single<FavoriteUseCase> { FavoriteUseCaseImplement(get()) }
+    viewModel { FavoriteViewModel(get()) }
 }

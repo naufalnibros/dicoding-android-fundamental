@@ -13,6 +13,9 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(data: UserFavoriteScema): Completable
 
+    @Query("SELECT * FROM ${UserLocalConfig.TABLE_FAVORITE}")
+    fun findAll(): Flowable<List<UserFavoriteScema>>
+
     @Query("SELECT * FROM ${UserLocalConfig.TABLE_FAVORITE} WHERE username = :username LIMIT 1")
     fun find(username: String): Flowable<UserFavoriteScema>
 

@@ -2,6 +2,8 @@ package com.naufalnibros.submission_fundamental.repository.user
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.naufalnibros.submission_fundamental.core.local.user.UserFavoriteScema
+import io.reactivex.Flowable
 import kotlinx.parcelize.Parcelize
 
 
@@ -19,11 +21,22 @@ data class User(
     @SerializedName("html_url")
     val htmlUrl: String = "",
 
-    @SerializedName("url")
-    val url: String = "",
-
     @SerializedName("location")
     val alamat: String? = "",
 
     @SerializedName("name")
-    val name: String = ""): Parcelable
+    val name: String = ""
+) : Parcelable
+
+
+fun User.toUserFavorite() = UserFavoriteScema(
+    username = this.username,
+    avatar = this.avatar,
+    url = htmlUrl
+)
+
+fun List<UserFavoriteScema>.toListUser(): Flowable<List<User>> {
+    return Flowable.just(this.map { item ->
+        User(username = item.username, avatar = item.avatar, htmlUrl = item.url)
+    })
+}
