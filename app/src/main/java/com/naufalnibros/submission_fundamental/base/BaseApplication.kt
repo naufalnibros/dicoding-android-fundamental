@@ -2,6 +2,7 @@ package com.naufalnibros.submission_fundamental.base
 
 import android.app.Application
 import com.naufalnibros.submission_fundamental.BuildConfig
+import com.naufalnibros.submission_fundamental.core.local.localModule
 import com.naufalnibros.submission_fundamental.core.remote.errorHandleModule
 import com.naufalnibros.submission_fundamental.core.remote.remoteModule
 import org.koin.android.ext.koin.androidContext
@@ -27,7 +28,7 @@ abstract class BaseApplication: Application() {
             androidContext(this@BaseApplication)
 
             modules(
-                mutableListOf(remoteModule, errorHandleModule)
+                mutableListOf(remoteModule, localModule, errorHandleModule)
                     .apply { addAll(defineDependencies()) }
             )
         }

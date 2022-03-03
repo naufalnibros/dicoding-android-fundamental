@@ -26,11 +26,6 @@ class ProfileTabFragment : Fragment(R.layout.fragment_profile_tab) {
         requireArguments().getString(USERNAME_KEY, "")
     }
 
-    companion object {
-        const val TAB_KEY = "tabb"
-        const val USERNAME_KEY = "usernamekey"
-    }
-
     private val adapter = UserAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +50,11 @@ class ProfileTabFragment : Fragment(R.layout.fragment_profile_tab) {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    companion object {
+        const val TAB_KEY = "tabb"
+        const val USERNAME_KEY = "usernamekey"
     }
 
 }
