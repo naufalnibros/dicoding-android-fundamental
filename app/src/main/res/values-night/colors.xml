@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#151313</color>
+    <color name="purple_500">#B284F4</color>
+
+    <color name="favorite_active">#D36E91</color>
+    <color name="favorite_non_active">#2C2125</color>
+
+    <color name="color_delete">#AC6565</color>
+    <color name="color_icon">#C6C6CC</color>
+
+    <color name="blue_dark">#66A5EA</color>
+    <color name="blue_light">#142E55</color>
+    <color name="grey_light">#171D25</color>
+</resources>

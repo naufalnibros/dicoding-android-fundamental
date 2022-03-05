@@ -95,13 +95,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val favoriteObserver = Observer<FavoriteState> {
         when (it) {
             FavoriteState.NotFound -> {
-                binding.fab.setColortint(R.color.grey_light)
+                binding.fab.setColortint(R.color.favorite_non_active)
                 binding.fab.setOnClickListener {
                     viewModel.favorite(user)
                 }
             }
             FavoriteState.OnSaved -> {
-                binding.fab.setColortint(R.color.grey_dark)
+                binding.fab.setColortint(R.color.favorite_active)
                 binding.fab.setOnClickListener {
                     viewModel.delete(user.username)
                 }

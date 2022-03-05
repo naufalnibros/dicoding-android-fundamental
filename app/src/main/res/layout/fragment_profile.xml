@@ -115,7 +115,7 @@
         android:layout_margin="@dimen/_16sdp"
         android:clickable="true"
         android:focusable="true"
-        android:tint="@color/grey_dark"
+        android:tint="@color/favorite_non_active"
         app:layout_anchor="@id/container_content"
         app:layout_anchorGravity="end|bottom"
         app:srcCompat="@drawable/ic_baseline_favorite_24"
