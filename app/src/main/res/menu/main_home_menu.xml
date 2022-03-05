@@ -6,13 +6,23 @@
     <item
         android:id="@+id/action_favotire"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="Setting"
+        android:title="Favorite"
         app:showAsAction="ifRoom"
         tools:ignore="HardcodedText" />
     <item
-        android:id="@+id/action_darkthem"
+        android:id="@+id/actione_theme"
         android:icon="@drawable/ic_baseline_settings_24"
         app:showAsAction="ifRoom"
         android:title="Setting"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/action_darktheme"
+                android:title="Dark Theme" />
+            <item
+                android:id="@+id/action_lighttheme"
+                android:title="Light Theme" />
+        </menu>
+
+    </item>
 </menu>
