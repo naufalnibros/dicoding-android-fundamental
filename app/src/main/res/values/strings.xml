@@ -6,4 +6,10 @@
     <string name="field_name">Nama :</string>
     <string name="field_alamat">Alamat :</string>
     <string name="field_urlrepo">Link Profile :</string>
+
+
+    <string name="confirm_dialog_title">Konfirmasi</string>
+    <string name="confirm_dialog_desc">Apakah Anda yakin akan menghapus ini?</string>
+    <string name="confirm_dialog_positive">Ya</string>
+    <string name="confirm_dialog_neutral">Tidak jadi</string>
 </resources>

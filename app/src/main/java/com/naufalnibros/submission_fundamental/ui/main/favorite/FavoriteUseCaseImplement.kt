@@ -12,4 +12,5 @@ class FavoriteUseCaseImplement(val repository: UserRepository) : FavoriteUseCase
         .subscribeOn(Schedulers.io())
         .flatMap { database -> database.toListUser() }
 
+    override fun truncate() = repository.truncateFavorite()
 }

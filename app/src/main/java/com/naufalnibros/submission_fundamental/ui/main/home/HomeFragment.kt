@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.naufalnibros.submission_fundamental.R
 import com.naufalnibros.submission_fundamental.databinding.FragmentHomeBinding
@@ -19,17 +20,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by inject()
 
-    private val adapter = UserAdapter()
+    private val adapter = UserAdapter {
+        findNavController().navigate(HomeFragmentDirections.toProfileFragment(it))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_favotire -> {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+                    )
+                }
+                R.id.action_darkthem -> {
+
+                }
+            }
+            false
+        }
 
         binding.searchview.setOnQueryTextListener(onQueryTextListener)
 
         binding.swiperefresh.setOnRefreshListener { viewModel.refresh() }
 
         binding.recyclerview.adapter = adapter
-        binding.recyclerview.addItemDecoration(DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL))
+        binding.recyclerview.addItemDecoration(
+            DividerItemDecoration(
+                requireActivity(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
         viewModel.stateList.observe(viewLifecycleOwner, observerStateList)
     }

@@ -5,26 +5,35 @@ import com.naufalnibros.submission_fundamental.base.BaseViewModel
 import com.naufalnibros.submission_fundamental.repository.user.User
 import io.reactivex.schedulers.Schedulers
 
-class FavoriteViewModel(useCase: FavoriteUseCase) : BaseViewModel() {
+class FavoriteViewModel(private val useCase: FavoriteUseCase) : BaseViewModel() {
 
     private val _state = MutableLiveData<ListFavoriteState>()
 
     val state get() = _state
 
-    init {
-        useCase.list()
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                _state.postValue(ListFavoriteState.OnLoading)
-            }
-            .subscribe({
-                _state.postValue(ListFavoriteState.OnSuccess(it))
-            }, {
-                _state.postValue(ListFavoriteState.OnError(it.message ?: ""))
-            })
-            .disposeOnCleared()
-    }
+    fun list() = useCase.list()
+        .subscribeOn(Schedulers.io())
+        .doOnSubscribe {
+            _state.postValue(ListFavoriteState.OnLoading)
+        }
+        .subscribe({
+            _state.postValue(ListFavoriteState.OnSuccess(it))
+        }, {
+            _state.postValue(ListFavoriteState.OnError(it.message ?: ""))
+        })
+        .disposeOnCleared()
 
+    fun deleteAll() = useCase.truncate()
+        .subscribeOn(Schedulers.io())
+        .doOnSubscribe {
+            _state.postValue(ListFavoriteState.OnLoading)
+        }
+        .subscribe({
+            useCase.list()
+        }, {
+            _state.postValue(ListFavoriteState.OnError(it.message ?: ""))
+        })
+        .disposeOnCleared()
 
 }
 

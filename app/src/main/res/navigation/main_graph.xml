@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.naufalnibros.submission_fundamental.ui.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/to_profileFragment"
             app:destination="@id/profileFragment">
@@ -17,6 +17,9 @@
                 android:name="user"
                 app:argType="com.naufalnibros.submission_fundamental.repository.user.User" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -26,5 +29,25 @@
         <argument
             android:name="user"
             app:argType="com.naufalnibros.submission_fundamental.repository.user.User" />
+        <action
+            android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment">
+            <argument
+                android:name="user"
+                app:argType="com.naufalnibros.submission_fundamental.repository.user.User" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.naufalnibros.submission_fundamental.ui.main.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favoriteFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+            <argument
+                android:name="user"
+                app:argType="com.naufalnibros.submission_fundamental.repository.user.User" />
+        </action>
     </fragment>
 </navigation>

@@ -4,10 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:keep="@menu/main_home_menu">
     <item
+        android:id="@+id/action_favotire"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="Setting"
+        app:showAsAction="ifRoom"
+        tools:ignore="HardcodedText" />
+    <item
         android:id="@+id/action_darkthem"
         android:icon="@drawable/ic_baseline_settings_24"
         app:showAsAction="ifRoom"
         android:title="Setting"
-        tools:ignore="HardcodedText">
-    </item>
+        tools:ignore="HardcodedText" />
 </menu>

@@ -44,7 +44,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         Glide.with(binding.root.context)
             .load(user.avatar)
-            .placeholder(R.mipmap.ic_github)
             .fitCenter()
             .into(binding.avatar)
 

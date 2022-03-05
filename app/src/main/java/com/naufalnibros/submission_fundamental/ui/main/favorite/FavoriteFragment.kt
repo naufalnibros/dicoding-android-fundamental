@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.naufalnibros.submission_fundamental.R
 import com.naufalnibros.submission_fundamental.databinding.FragmentFavoriteBinding
@@ -18,10 +19,29 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     private val viewModel: FavoriteViewModel by inject()
 
-    private val adapter = UserAdapter()
+    private val adapter = UserAdapter {
+        findNavController().navigate(
+            FavoriteFragmentDirections.actionFavoriteFragmentToProfileFragment(
+                it
+            )
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(binding.toolbar) {
+            setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_truncate -> viewModel.deleteAll()
+                }
+                false
+            }
+        }
 
         binding.recyclerview.adapter = adapter
         binding.recyclerview.addItemDecoration(
@@ -44,7 +64,11 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 }
             }
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.list()
     }
 
 }

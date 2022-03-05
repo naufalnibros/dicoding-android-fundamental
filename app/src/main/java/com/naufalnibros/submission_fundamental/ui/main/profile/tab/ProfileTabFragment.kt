@@ -5,10 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.naufalnibros.submission_fundamental.R
 import com.naufalnibros.submission_fundamental.databinding.FragmentProfileTabBinding
 import com.naufalnibros.submission_fundamental.ui.main.UserAdapter
+import com.naufalnibros.submission_fundamental.ui.main.profile.ProfileFragmentDirections
 import com.naufalnibros.submission_fundamental.utils.viewBinding
 import org.koin.android.ext.android.inject
 
@@ -26,7 +28,9 @@ class ProfileTabFragment : Fragment(R.layout.fragment_profile_tab) {
         requireArguments().getString(USERNAME_KEY, "")
     }
 
-    private val adapter = UserAdapter()
+    private val adapter = UserAdapter {
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentSelf(it))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +39,12 @@ class ProfileTabFragment : Fragment(R.layout.fragment_profile_tab) {
         binding.swiperefresh.setOnRefreshListener { viewModel.list(tabkey, username) }
 
         binding.recyclerview.adapter = adapter
-        binding.recyclerview.addItemDecoration(DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL))
+        binding.recyclerview.addItemDecoration(
+            DividerItemDecoration(
+                requireActivity(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
         viewModel.state.observe(viewLifecycleOwner, observerState)
     }
 
